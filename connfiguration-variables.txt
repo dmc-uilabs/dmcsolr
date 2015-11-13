@@ -1,0 +1,5 @@
+The following environment variables are needed for DMCSolr
+
+// hostname for (postgres) database
+$solrDbDns
+
