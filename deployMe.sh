@@ -1,14 +1,15 @@
+#!/bin/bash
 #
 # deployMe.sh for Apache Solr
 #
 
 cd /tmp
+rm -fr /tmp/dmcsolr
 git clone https://bitbucket.org/DigitalMfgCommons/dmcsolr.git
 cd dmcsolr
 mv * ..
 
-
-#!/bin/bash
+#
 yum update -y
 
 # install java
@@ -23,19 +24,30 @@ yum install -y tomcat6
 echo installing tomcat
 yum install -y git
 
+# Unpacking solr configuration
+rm -fr /tmp/solr
+mkdir /tmp/solr
+cd /tmp/solr
+tar xvfz /tmp/dmcsolr/files/solr.tar.gz
+
 # download solr
 echo Downloading and installing solr
+rm -fr /opt/solr
 mkdir /opt/solr
 cd /opt/solr
 wget http://archive.apache.org/dist/lucene/solr/3.6.0/apache-solr-3.6.0.tgz
 tar xvzf apache-solr-3.6.0.tgz
 
+#
 echo "Moving solr.war and creating home/solr for configuration..."
 cp /opt/solr/apache-solr-3.6.0/example/webapps/solr.war /usr/share/tomcat6/webapps/solr.war
 cd /opt/solr/apache-solr-3.6.0 
 mkdir home
 mkdir home/solr
 
+# Moving configuration directories
+mv -f /tmp/solr/LuceneSolrConfig/* /opt/solr/apache-solr-3.6.0/home/solr/ 
+mv -f /tmp/solr/TomcatConfig/server.xml /usr/share/tomcat6/conf/server.xml 
 
 # Edit components.data-config.xml
 sed "s/SOLR_DB_DNS/$solrDbDns" files/components.data-config.xml > /opt/solr/apache-solr-3.6.0/home/solr/components/conf/data-config.xml
@@ -52,26 +64,13 @@ sed "s/SOLR_DB_DNS/$solrDbDns" files/users.data-config.xml > /opt/solr/apache-so
 # Edit wiki.data-config.xml
 sed "s/SOLR_DB_DNS/$solrDbDns" files/wiki.data-config.xml > /opt/solr/apache-solr-3.6.0/home/solr/wiki/conf/data-config.xml
 
-# Edit upload_solr_server_domain_name.sh
-# sed "s/SOLR_PRIVATE_BUCKET_NAME/$solrPrivateBucketName" files/upload_solr_server_domain_name.sh > /tmp/upload_solr_server_domain_name.sh
+#
+echo "chowning directories"
+cd /opt/solr/apache-solr-3.6.0/home/solr 
+chown tomcat . components components/conf  services services/conf projects projects/conf users users/conf artifacts artifacts/conf wiki wiki/conf
 
-# Edit get_bucket_files.sh
-# sed "s/SOLR_BUCKET_BASE/$solrBucketBase" files/upload_solr_server_domain_name.sh | "s/SOLR_CONFIG_PATH/$solrConfigpath" > /tmp/get_bucket_files.sh
-
-# start tomcat
-#service tomcat6 start
-
-# Install SolR Configuration
-echo configuring SolR
-mkdir DMC
-cd DMC
-rm -rf *
-#git clone https://bitbucket.org/DigitalMfgCommons/dmcsolr.git
-git clone https://wisegb@bitbucket.org/DigitalMfgCommons/dmcsolr.git
-cd dmcsolr
-
-#cp target/dmc-site-services-0.1.0.war /var/lib/tomcat6/webapps
-#service /etc/init.d/tomcat7 restart
-
-
+#
+echo "Starting Apache Tomcat" 
+/etc/rc.d/init.d/tomcat6 start
+chkconfig tomcat6 on 
 
