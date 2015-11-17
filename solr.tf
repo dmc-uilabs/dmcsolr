@@ -39,8 +39,7 @@ resource "aws_instance" "solr" {
         "sudo echo 'export solrDbDns=${aws_instance.db.private_ip} >> ~/.bashrc",
         "chmod +x /tmp/script.sh",
         "cd /tmp",
-        "./script.sh",
-        "sudo  reboot -h +1"
+        "./script.sh"
         ]
 
       connection {
