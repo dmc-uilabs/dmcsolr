@@ -3,6 +3,9 @@
 # deployMe.sh for Apache Solr
 #
 
+# Ensure environment variables are read
+source ~/.bashrc
+
 #
 sudo yum update -y
 
