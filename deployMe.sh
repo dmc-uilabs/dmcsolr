@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -v
 #
 # deployMe.sh for Apache Solr
 #
