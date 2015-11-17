@@ -42,6 +42,7 @@ echo moving DMC solr configuration files to solr home /opt/solr/solr-5.3.1/serve
 sudo mv -f /tmp/solr/LuceneSolrConfig/* /opt/solr/solr-5.3.1/server/solr
 
 # Edit components.data-config.xml
+echo "Editing SolR data configurations to use solrDbDns=$solrDbDns"
 cd /tmp/dmcsolr
 sudo solrDbDns=$solrDbDns sed "s/SOLR_DB_DNS/$solrDbDns/" files/components.data-config.xml > /opt/solr/solr-5.3.1/server/solr/gforge/components/conf/data-config.xml
 
