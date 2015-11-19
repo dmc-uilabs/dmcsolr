@@ -3,6 +3,8 @@
 # deployMe.sh for Apache Solr
 #
 
+# Ensure environment variables are loaded
+source ~/.bashrc
 
 # Download DMC Solr files
 cd /tmp
