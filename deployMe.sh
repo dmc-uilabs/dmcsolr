@@ -68,8 +68,9 @@ sudo -u solr -E sed "s/SOLR_DB_DNS/$solrDbDns/" files/wiki.data-config.xml > /va
 # Install scripts
 
 sudo -u solr cp -r files/scripts  /var/solr
+sudo -u solr chmod +x /var/solr/scripts/*.sh
 sudo -u solr crontab files/scripts/cron_solr_index
-sudo -u crontab -l
+sudo -u solr crontab -l
 
 
 # Restart solr
