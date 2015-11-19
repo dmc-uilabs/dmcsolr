@@ -1,0 +1,2 @@
+# Run solr incremental indexing every 10 minutes
+*/10 * * * * /var/solr/scripts/solr_fullindex.sh
