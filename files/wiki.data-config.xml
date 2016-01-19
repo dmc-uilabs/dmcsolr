@@ -16,7 +16,7 @@
   />
   <document>
     <entity name="wiki_page"
-            query="select page_id as id, name, group_id, contents, creation_time as created, modified_time as modified from cem_objects">
+            query="select page_id as id, name, group_id, contents, creation_time as created, modified_time as modified from wiki_pages">
       <field column="id" name="id" />
       <field column="name" name="name" />
       <field column="group_id" name="group_id" />
