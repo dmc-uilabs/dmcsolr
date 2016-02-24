@@ -1,0 +1,6 @@
+#ec2-user ALL = NOPASSWD: ALL
+Defaults:bamboo !requiretty
+bamboo ALL = (solr) NOPASSWD: ALL
+
+bamboo ALL = NOPASSWD: /usr/bin/service solr *
+
