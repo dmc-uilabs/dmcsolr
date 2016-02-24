@@ -2,5 +2,6 @@
 Defaults:bamboo !requiretty
 bamboo ALL = (solr) NOPASSWD: ALL
 
-bamboo ALL = NOPASSWD: /usr/bin/service solr *
+Defaults:bamboo !requiretty
+bamboo ALL = NOPASSWD: /sbin/service solr status, /sbin/service solr restart
 
