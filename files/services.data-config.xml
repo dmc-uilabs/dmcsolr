@@ -16,12 +16,14 @@
 	      />
   <document>
     <entity name="service" transformer="RegexTransformer"
-            query="select interface_id as id, server_id, cem_id, interface_data from dome_interfaces">
+            query="select interface_id as id, server_id, cem_id, interface_data, alias as title, description from dome_interfaces">
       <field column="id" name="id" />
       <field column="server_id" name="server_id" />
       <field column="cem_id" name="cem_id" />
       <field column="interface_data" name="interface_data" />
       <field name="interface_name" sourceColName="interface_data" column="interface_name" regex=',"name":"([^"]+)' />
+      <field column="title" name="title" />
+      <field column="description" name="description" />
       <entity name="server"
               query="select url, user_id from servers where server_id = '${service.server_id}'">
         <field column="url" name="server_url" />
