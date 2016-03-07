@@ -4,5 +4,5 @@ User_Alias SOLR_USERS = bamboo
 SOLR_USERS ALL = (solr) NOPASSWD: ALL
 
 Defaults:bamboo !requiretty
-bamboo ALL = NOPASSWD: /sbin/service solr status, /sbin/service solr restart
+bamboo ALL = NOPASSWD: /sbin/service solr status, /sbin/service solr restart, /sbin/service solr stop, /sbin/service solr start
 
