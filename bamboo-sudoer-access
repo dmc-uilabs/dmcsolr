@@ -1,0 +1,8 @@
+#ec2-user ALL = NOPASSWD: ALL
+User_Alias SOLR_USERS = bamboo
+#should allow SOLR_USERS (i.e. bamboo) to run as solr without a password
+SOLR_USERS ALL = (solr) NOPASSWD: ALL
+
+Defaults:bamboo !requiretty
+bamboo ALL = NOPASSWD: /sbin/service solr status, /sbin/service solr restart, /sbin/service solr stop, /sbin/service solr start
+
