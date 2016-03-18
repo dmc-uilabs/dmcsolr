@@ -26,7 +26,7 @@ sudo -u solr rm -f /var/solr/data/gforge/wiki/conf/data-config.xml
 
 # Edit companies.data-config.xml
 sed "s/SOLR_DB_DNS/localhost/" files/companies.data-config.xml > files/tmp.companies.data-config.xml
-sudo -u solr cp files/tmp.companies.data-config.xml /var/solr/data/gforge/projects/conf/data-config.xml
+sudo -u solr cp files/tmp.companies.data-config.xml /var/solr/data/gforge/companies/conf/data-config.xml
 rm files/tmp.companies.data-config.xml
 
 echo "fix latest version of files and put in /var/solr"
