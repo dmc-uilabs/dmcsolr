@@ -15,6 +15,7 @@ rm -rf lucene-setup
 
 #remove old files
 echo "remove old copies of files if they exist"
+sudo -u solr rm -f /var/solr/data/gforge/companies/conf/data-config.xml
 sudo -u solr rm -f /var/solr/data/gforge/components/conf/data-config.xml
 sudo -u solr rm -f /var/solr/data/gforge/projects/conf/data-config.xml
 sudo -u solr rm -f /var/solr/data/gforge/services/conf/data-config.xml
@@ -22,6 +23,12 @@ sudo -u solr rm -f /var/solr/data/gforge/users/conf/data-config.xml
 sudo -u solr rm -f /var/solr/data/gforge/wiki/conf/data-config.xml
 
 #fix latest files and copy to /var/solr/data/gforge where they are expected to be
+
+# Edit companies.data-config.xml
+sed "s/SOLR_DB_DNS/localhost/" files/companies.data-config.xml > files/tmp.companies.data-config.xml
+sudo -u solr cp files/tmp.companies.data-config.xml /var/solr/data/gforge/companies/conf/data-config.xml
+rm files/tmp.companies.data-config.xml
+
 echo "fix latest version of files and put in /var/solr"
 sed "s/SOLR_DB_DNS/localhost/" files/components.data-config.xml > files/tmp.components.data-config.xml
 sudo -u solr cp files/tmp.components.data-config.xml /var/solr/data/gforge/components/conf/data-config.xml
