@@ -13,10 +13,13 @@ git clone https://bitbucket.org/DigitalMfgCommons/dmcsolr.git
 cd dmcsolr
 
 # re-create solr5.tar.gz
+echo "Creating solr5.tar.gz"
+pwd
 cd solr5
 rm -fr ../files/solr5.tar.gz
 tar acf ../files/solr5.tar.gz .
 cd ..
+ls -l files/solr5.tar.gz
 
 # download solr 
 echo Downloading and installing solr
