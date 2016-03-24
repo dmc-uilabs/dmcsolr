@@ -3,6 +3,12 @@
 echo "stop solr if running"
 sudo service solr stop
 
+# re-create solr5.tar.gz
+cd solr5
+rm -fr ../files/solr5.tar.gz
+tar acf ../files/solr5.tar.gz .
+cd ..
+
 #extract LuceneSolrConfig and copy to correct location
 echo "extract solr config from tar and copy to /var/solr"
 mkdir lucene-setup

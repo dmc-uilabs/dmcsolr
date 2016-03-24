@@ -1,0 +1,29 @@
+<dataConfig>
+  <script><![CDATA[
+       function skill_keywords(row) { var name = row.get('user_id'); var value = row.get('keywords'); row.put('keywords_s', value); return row; }
+]]>
+  </script>
+  <dataSource type="JdbcDataSource" 
+              driver="org.postgresql.Driver"
+	      url="jdbc:postgresql://ip-10-12-158-132.ec2.internal/gforge"
+              user="gforge" password="gforge"
+	      readOnly="true" autoCommit="false"
+	      transactionIsolation="TRANSACTION_READ_COMMITTED"
+	      holdability="CLOSE_CURSORS_AT_COMMIT"
+  />
+  <document>
+    <entity name="user"
+	    query="select user_id as id,user_name,realname from users">
+      <field column="id" name="id" />
+      <field column="user_name" name="user_name" />
+      <field column="realname" name="realname" />
+      <entity name="skills_data"
+	      query="select skill_keyword_name as skill_keyword from skill_keywords sk, user_skills_keywords_join uskj, user_skills us where sk.skill_keyword_id = uskj.skill_keyword_id and uskj.user_skill_id = us.user_skill_id and us.user_id = '${user.id}'">
+<!--	      query="select keywords from skills_data where user_id = '${user.id}'">-->
+<!--
+	      query="select keywords from skills_data where user_id = '${user.id}'" transformer="script:skill_keywords">-->
+	<field column="skill_keyword" name="skill_keyword" />
+      </entity>
+    </entity>
+  </document>
+</dataConfig>

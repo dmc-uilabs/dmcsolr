@@ -1,0 +1,24 @@
+<dataConfig>
+  <dataSource type="JdbcDataSource"
+              driver="org.postgresql.Driver"
+              url="jdbc:postgresql://SOLR_DB_DNS/gforge"
+              user="gforge" password="gforge"
+              readOnly="true" autoCommit="false"
+              transactionIsolation="TRANSACTION_READ_COMMITTED"
+              holdability="CLOSE_CURSORS_AT_COMMIT"
+	      />
+  <document>
+    <entity name="company"
+            query="select organization_id as id, name, location, division, description, industry, tech_expertise, tools_software_equip_mach, collaboration_interest FROM organization">
+      <field column="id" name="id" />
+      <field column="name" name="name" />
+      <field column="location" name="location" />
+	  <field column="division" name="division" />
+	  <field column="description" name="description" />
+	  <field column="industry" name="industry" />
+	  <field column="tech_expertise" name="tech_expertise" />
+	  <field column="tools_software_equip_mach" name="tools_software_equip_mach" />
+	  <field column="collaboration_interest" name="collaboration_interest" />	  
+    </entity>
+  </document>
+</dataConfig>
