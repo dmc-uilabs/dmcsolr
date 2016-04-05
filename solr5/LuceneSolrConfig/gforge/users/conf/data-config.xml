@@ -1,0 +1,24 @@
+<dataConfig>
+  <dataSource type="JdbcDataSource"
+              driver="org.postgresql.Driver"
+              url="jdbc:postgresql://SOLR_DB_DNS/gforge"
+              user="gforge" password="gforge"
+              readOnly="true" autoCommit="false"
+              transactionIsolation="TRANSACTION_READ_COMMITTED"
+              holdability="CLOSE_CURSORS_AT_COMMIT"
+	      />
+  <document>
+    <entity name="user"
+            query="select u.user_id as id, u.user_name, u.realname, o.organization_id AS company_id, o.name AS company from users u LEFT JOIN organization_user ou ON ou.user_id = u.user_id LEFT JOIN organization o ON o.organization_id = ou.organization_id">
+      <field column="id" name="id" />
+      <field column="user_name" name="user_name" />
+      <field column="realname" name="realname" />
+	  <field column="company_id" name="company_id" />
+	  <field column="company" name="company" />
+      <entity name="skills_data"
+              query="select ps.name as skill_keyword FROM users u left join people_skill_inventory psi ON psi.user_id = u.user_id left join people_skill ps ON ps.skill_id = psi.skill_id WHERE u.user_id = '${user.id}'">
+        <field column="skill_keyword" name="skill_keyword" />
+      </entity>
+    </entity>
+  </document>
+</dataConfig>

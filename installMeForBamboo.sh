@@ -33,6 +33,14 @@ sudo bash ./install_solr_service.sh  solr-5.3.1.tgz
 echo check solr service status
 sudo service solr status
 
+# re-create solr5.tar.gz
+echo "Creating solr5.tar.gz"
+cd  /tmp/dmcsolr/solr5
+pwd
+rm -fr ../files/solr5.tar.gz
+tar acf ../files/solr5.tar.gz .
+ls -l /tmp/dmcsolr/files/solr5.tar.gz
+
 # Unpacking solr configuration
 rm -fr /tmp/solr
 mkdir /tmp/solr

@@ -1,0 +1,39 @@
+<!--               url="jdbc:postgresql://ec2-50-19-169-248.compute-1.amazonaws.com/gforgedev" 
+-->
+
+<dataConfig>
+  <script><![CDATA[
+       function skill_keywords(row) { var name = row.get('user_id'); var value = row.get('keywords'); row.put('keywords_s', value); return row; }
+]]>
+  </script>
+  <dataSource type="JdbcDataSource" 
+              driver="org.postgresql.Driver"
+	      url="jdbc:postgresql://172.31.22.92/gforge"
+              user="gforge" password="gforge"
+	      readOnly="true" autoCommit="false"
+	      transactionIsolation="TRANSACTION_READ_COMMITTED"
+	      holdability="CLOSE_CURSORS_AT_COMMIT"
+  />
+  <document>
+    <entity name="wiki_page"
+            query="select page_id as id, name, group_id, contents, creation_time as created, modified_time as modified from wiki_pages">
+      <field column="id" name="id" />
+      <field column="name" name="name" />
+      <field column="group_id" name="group_id" />
+      <field column="contents" name="contents" />
+      <entity name="groups"
+	      query="select group_name, unix_group_name, is_public from groups where group_id = '${wiki_page.group_id}'">
+	<field column="unix_group_name" name="unix_group_name" />
+	<field column="group_name" name="group_name" />
+	<field column="is_public" name="is_public" />
+      </entity>
+      <entity name="wiki_categories"
+	      query="select cat_id from wiki_pages_wiki_categories_join where page_id = '${wiki_page.id}'">
+	<entity name="category"
+		query="select name as category_name from wiki_categories where cat_id = '${wiki_categories.cat_id}'">
+	  <field column="category_name" name="category_name"/>
+	</entity>
+      </entity>
+    </entity>
+  </document>
+</dataConfig>
