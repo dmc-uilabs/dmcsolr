@@ -38,6 +38,10 @@
 			<field column="owner_user_name" name="owner_user_name" />
 			<field column="owner_realname" name="owner_realname" />
 		</entity>		
+      <entity name="service_interface"
+	      query="select name as service_interface_name FROM service_interface WHERE service_id = '${service.id}'">
+			<field column="service_interface_name" name="service_interface_name" />
+		</entity>				
 	</entity>
   </document>
 </dataConfig>

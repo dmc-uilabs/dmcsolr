@@ -139,6 +139,8 @@
 	<field name="owner_user_name" type="string" stored="true" />
 	<field name="owner_realname" type="string" stored="true" />
 
+	<field name="service_interface_name" type="string" stored="true" />
+	
    <!--   
    <field name="id" type="string" indexed="true" required="true" stored="true"  />
    <field name="group_id" type="string" indexed="true" stored="true"  />
