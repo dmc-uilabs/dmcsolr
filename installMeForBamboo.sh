@@ -45,7 +45,7 @@ ls -l /tmp/dmcsolr/files/solr5.tar.gz
 rm -fr /tmp/solr
 mkdir /tmp/solr
 cd /tmp/solr
-tar xvfz /tmp/dmcsolr/files/solr5.tar.gz
+tar xfz /tmp/dmcsolr/files/solr5.tar.gz
 
 # Log in as solr user
 echo chown directories to solr
