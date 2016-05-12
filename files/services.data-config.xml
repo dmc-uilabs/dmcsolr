@@ -1,52 +1,47 @@
-<!--               url="jdbc:postgresql://ec2-50-19-169-248.compute-1.amazonaws.com/gforgedev"
+<!--               url="jdbc:postgresql://ec2-50-19-169-248.compute-1.amazonaws.com/gforgedev" 
 -->
 
 <dataConfig>
   <script><![CDATA[
-  function skill_keywords(row) { var name = row.get('user_id'); var value = row.get('keywords'); row.put('keywords_s', value); return row; }
-  ]]>
+       function skill_keywords(row) { var name = row.get('user_id'); var value = row.get('keywords'); row.put('keywords_s', value); return row; }
+]]>
   </script>
-  <dataSource type="JdbcDataSource"
+  <dataSource type="JdbcDataSource" 
               driver="org.postgresql.Driver"
               url="jdbc:postgresql://SOLR_DB_DNS/gforge"
               user="gforge" password="gforge"
-              readOnly="true" autoCommit="false"
-              transactionIsolation="TRANSACTION_READ_COMMITTED"
-              holdability="CLOSE_CURSORS_AT_COMMIT"
-	      />
+	      readOnly="true" autoCommit="false"
+	      transactionIsolation="TRANSACTION_READ_COMMITTED"
+	      holdability="CLOSE_CURSORS_AT_COMMIT"
+  />
   <document>
     <entity name="service" transformer="RegexTransformer"
-            query="select interface_id as id, server_id, cem_id, interface_data, alias as title, description from dome_interfaces">
+	    query="select service_id as id, organization_id, title, description, owner_id, tags, specifications, project_id, type, parent, published FROM service">
       <field column="id" name="id" />
-      <field column="server_id" name="server_id" />
-      <field column="cem_id" name="cem_id" />
-      <field column="interface_data" name="interface_data" />
-      <field name="interface_name" sourceColName="interface_data" column="interface_name" regex=',"name":"([^"]+)' />
-      <field column="title" name="title" />
-      <field column="description" name="description" />
-      <entity name="server"
-              query="select url, user_id from servers where server_id = '${service.server_id}'">
-        <field column="url" name="server_url" />
-        <field column="user_id" name="user_id" />
-      </entity>
-      <entity name="cem_service_categories"
-              query="select cat_id from cem_service_categories where cem_id = '${service.cem_id}'">
-        <field column="cat_id" name="cat_id" />
-        <entity name="category"
-                query="select name as category_name from service_categories where cat_id = '${cem_service_categories.cat_id}'">
-          <field column="category_name" name="category_name"/>
-        </entity>
-      </entity>
-      <entity name="component"
-              query="select group_id from cem_objects where cem_id = '${service.cem_id}'">
-        <entity name="groups"
-                query="select group_name,unix_group_name, is_public from groups where group_id = '${component.group_id}'">
-          <field column="group_name" name="group_name" />
-          <field column="unix_group_name" name="unix_group_name" />
-          <field column="is_public" name="is_public" />
-        </entity>
-        <field column="group_id" name="group_id" />
-      </entity>
-    </entity>
+      <field column="organization_id" name="organization_id" />
+	  <field column="title" name="title" />
+	  <field column="description" name="description" />
+	  <field column="owner_id" name="owner_id" />
+	  
+	  <field column="tags" name="tags" />
+      <field column="specifications" name="specifications" />
+	  <field column="project_id" name="project_id" />
+	  <field column="type" name="type" />
+	  <field column="published" name="published" />
+      <entity name="company"
+	      query="select name as company_name, description as company_description FROM organization where organization_id = '${service.organization_id}'">
+			<field column="company_name" name="company_name" />
+			<field column="company_description" name="company_description" />
+		</entity>
+      <entity name="owner"
+	      query="select user_name as owner_user_name, realname as owner_realname FROM users where user_id = '${service.owner_id}'">
+			<field column="owner_user_name" name="owner_user_name" />
+			<field column="owner_realname" name="owner_realname" />
+		</entity>		
+      <entity name="service_interface"
+	      query="select name as service_interface_name FROM service_interface WHERE service_id = '${service.id}'">
+			<field column="service_interface_name" name="service_interface_name" />
+		</entity>				
+	</entity>
   </document>
 </dataConfig>

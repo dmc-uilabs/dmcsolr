@@ -122,6 +122,27 @@
    -->   
 
    <field name="id" type="string" indexed="true" required="true" stored="true"  />
+   <field name="organization_id" type="string" indexed="true" required="true" stored="true"  />
+   <field name="title" type="string" indexed="true" stored="true"  />
+   <field name="description" type="string" stored="true" />
+   <field name="owner_id" type="string" indexed="false" stored="true" />
+   <field name="tags" type="text_general" stored="true" />
+   <field name="specifications" type="text_general" stored="true" />
+   <field name="project_id" type="text_general" stored="true" />
+   <field name="type" type="string" stored="true" />
+   <field name="parent" type="string" stored="true" />
+   <field name="published" type="string" stored="true" />
+   
+    <field name="company_name" type="string" stored="true" />
+	<field name="company_description" type="string" stored="true" />
+	
+	<field name="owner_user_name" type="string" stored="true" />
+	<field name="owner_realname" type="string" stored="true" />
+
+	<field name="service_interface_name" type="string" stored="true" />
+	
+   <!--   
+   <field name="id" type="string" indexed="true" required="true" stored="true"  />
    <field name="group_id" type="string" indexed="true" stored="true"  />
    <field name="interface_id" type="string" stored="true" />
    <field name="interface_data" type="string" indexed="false" stored="true" />
@@ -140,7 +161,6 @@
    <field name="category_name" type="text_general" indexed="true" stored="true" multiValued="true" />
    <field name="tag_name" type="text_general" indexed="true" stored="true" multiValued="true" />
 
-   <!--
    <field name="sku" type="text_en_splitting_tight" indexed="true" stored="true" omitNorms="true"/>
    <field name="name" type="text_general" indexed="true" stored="true"/>
    <field name="manu" type="text_general" indexed="true" stored="true" omitNorms="true"/>
