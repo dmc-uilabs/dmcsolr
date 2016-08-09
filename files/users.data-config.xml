@@ -1,7 +1,7 @@
 <dataConfig>
   <dataSource type="JdbcDataSource"
               driver="org.postgresql.Driver"
-              url="jdbc:postgresql://SOLR_DB_DNS/gforge"
+              url="jdbc:postgresql://SOLR_DB_DNS:SOLR_DB_PORT/gforge"
               user="gforge" password="gforge"
               readOnly="true" autoCommit="false"
               transactionIsolation="TRANSACTION_READ_COMMITTED"

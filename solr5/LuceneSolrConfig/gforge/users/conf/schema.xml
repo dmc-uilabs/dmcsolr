@@ -128,6 +128,14 @@
    <field name="company" type="text_general" indexed="true" stored="true"/>
    <field name="skill_keyword" type="text_general" indexed="true" stored="true" multiValued="true" />
 
+   <field name="title" type="text_general" indexed="true" stored="true"/>
+   <field name="phone" type="text_general" indexed="true" stored="true"/>
+   <field name="email" type="text_general" indexed="true" stored="true"/>
+   <field name="address" type="text_general" indexed="true" stored="true"/>
+   <field name="image" type="text_general" indexed="true" stored="true"/>
+   <field name="people_resume" type="text_general" indexed="true" stored="true"/>
+   <field name="dmdii_expire_date" type="text_general" indexed="true" stored="true"/>
+   
    <!--   
    <field name="group_name" type="text_general" indexed="true" stored="true" />
    <field name="category_name" type="text_general" indexed="true" stored="true" multiValued="true" />
