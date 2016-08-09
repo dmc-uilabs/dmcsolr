@@ -34,32 +34,34 @@ sudo -u solr rm -f /var/solr/data/gforge/wiki/conf/data-config.xml
 #fix latest files and copy to /var/solr/data/gforge where they are expected to be
 
 # Edit companies.data-config.xml
-sed "s/SOLR_DB_DNS/localhost/" -e "s/SOLR_DB_PORT/8983/" files/companies.data-config.xml > files/tmp.companies.data-config.xml
+echo "Editing SolR data configurations to use SOLR_DB_DNS=localhost"
+echo "Editing SolR data configurations to use SOLR_DB_PORT=8983"
+sed -e "s/SOLR_DB_DNS/localhost/" -e "s/SOLR_DB_PORT/8983/" files/companies.data-config.xml > files/tmp.companies.data-config.xml
 sudo -u solr cp files/tmp.companies.data-config.xml /var/solr/data/gforge/companies/conf/data-config.xml
 rm files/tmp.companies.data-config.xml
 
 echo "fix latest version of files and put in /var/solr"
-sed "s/SOLR_DB_DNS/localhost/" -e "s/SOLR_DB_PORT/8983/" files/components.data-config.xml > files/tmp.components.data-config.xml
+sed -e "s/SOLR_DB_DNS/localhost/" -e "s/SOLR_DB_PORT/8983/" files/components.data-config.xml > files/tmp.components.data-config.xml
 sudo -u solr cp files/tmp.components.data-config.xml /var/solr/data/gforge/components/conf/data-config.xml
 rm files/tmp.components.data-config.xml
 
 # Edit projects.data-config.xml
-sed "s/SOLR_DB_DNS/localhost/" -e "s/SOLR_DB_PORT/8983/" files/projects.data-config.xml > files/tmp.projects.data-config.xml
+sed -e "s/SOLR_DB_DNS/localhost/" -e "s/SOLR_DB_PORT/8983/" files/projects.data-config.xml > files/tmp.projects.data-config.xml
 sudo -u solr cp files/tmp.projects.data-config.xml /var/solr/data/gforge/projects/conf/data-config.xml
 rm files/tmp.projects.data-config.xml
 
 # Edit services.data-config.xml
-sed "s/SOLR_DB_DNS/localhost/" -e "s/SOLR_DB_PORT/8983/" files/services.data-config.xml > files/tmp.services.data-config.xml
+sed -e "s/SOLR_DB_DNS/localhost/" -e "s/SOLR_DB_PORT/8983/" files/services.data-config.xml > files/tmp.services.data-config.xml
 sudo -u solr cp files/tmp.services.data-config.xml /var/solr/data/gforge/services/conf/data-config.xml
 rm files/tmp.services.data-config.xml
 
 # Edit users.data-config.xml
-sed "s/SOLR_DB_DNS/localhost/" -e "s/SOLR_DB_PORT/8983/" files/users.data-config.xml > files/tmp.users.data-config.xml
+sed -e "s/SOLR_DB_DNS/localhost/" -e "s/SOLR_DB_PORT/8983/" files/users.data-config.xml > files/tmp.users.data-config.xml
 sudo -u solr cp files/tmp.users.data-config.xml /var/solr/data/gforge/users/conf/data-config.xml
 rm files/tmp.users.data-config.xml
 
 # Edit wiki.data-config.xml
-sed "s/SOLR_DB_DNS/localhost/" -e "s/SOLR_DB_PORT/8983/" files/wiki.data-config.xml > files/tmp.wiki.data-config.xml
+sed -e "s/SOLR_DB_DNS/localhost/" -e "s/SOLR_DB_PORT/8983/" files/wiki.data-config.xml > files/tmp.wiki.data-config.xml
 sudo -u solr cp files/tmp.wiki.data-config.xml /var/solr/data/gforge/wiki/conf/data-config.xml
 rm files/tmp.wiki.data-config.xml
 
