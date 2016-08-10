@@ -12,7 +12,6 @@
             query="select u.user_id as id, u.user_name, u.realname, u.title, u.phone, u.email, u.address, u.image, u.people_resume, o.organization_id AS company_id, o.name AS company, dmdii.expire_date as dmdii_expire_date from users u LEFT JOIN organization_user ou ON ou.user_id = u.user_id LEFT JOIN organization o ON o.organization_id = ou.organization_id LEFT JOIN organization_dmdii_member dmdii ON dmdii.organization_id = o.organization_id"
             >
       <field column="id" name="id" />
-      <field column="user_id" name="user_id" />
       <field column="user_name" name="user_name" />
       <field column="realname" name="realname" />
 	  <field column="company_id" name="company_id" />
